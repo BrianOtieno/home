@@ -1,0 +1,590 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description"
+        content="Refined Modern House Design – A balance of light, geometry, and silence. Explore minimalist architecture.">
+    <title>HOME | Refined Modern Architecture</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&amp;family=Playfair+Display:wght@500;600&amp;display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --bg: #ffffff;
+            --text: #111111;
+            --muted: #666666;
+            --accent: #d4af37;
+            /* Soft gold accent for luxury feel */
+            --border: rgba(17, 17, 17, 0.08);
+        }
+
+        body.dark {
+            --bg: #0a0a0a;
+            --text: #f5f5f5;
+            --muted: #aaaaaa;
+            --border: rgba(245, 245, 245, 0.08);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            line-height: 1.7;
+            overflow-x: hidden;
+            transition: background 0.4s ease;
+        }
+
+        /* NAV */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 20px 5%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            z-index: 1000;
+            backdrop-filter: blur(16px);
+            border-bottom: 1px solid var(--border);
+            transition: all 0.3s ease;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 32px;
+            font-size: 0.95rem;
+            font-weight: 500;
+        }
+
+        .nav-links a {
+            color: var(--text);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-actions {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        /* HERO */
+        .hero {
+            height: 100vh;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .layer-bg {
+            position: absolute;
+            inset: 0;
+            background: url('house-m-01.jpg') center/cover no-repeat;
+            transform: scale(1.08);
+            transition: transform 0.6s ease;
+        }
+
+        .layer-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.55));
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            color: white;
+            max-width: 800px;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3.2rem, 8vw, 7rem);
+            font-weight: 600;
+            letter-spacing: -2px;
+            margin-bottom: 16px;
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 500px;
+            margin: 0 auto 32px;
+            opacity: 0.95;
+        }
+
+        .cta-btn {
+            display: inline-block;
+            padding: 14px 36px;
+            border: 1px solid rgba(255, 255, 255, 0.7);
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: white;
+            color: #111;
+            border-color: white;
+        }
+
+        /* SCROLL INDICATOR */
+        .scroll-progress {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            background: var(--accent);
+            z-index: 2000;
+            transition: width 0.1s ease;
+        }
+
+        /* SECTIONS */
+        .section {
+            padding: 120px 5%;
+            min-height: 80vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.9s cubic-bezier(0.23, 1, 0.32, 1);
+        }
+
+        .section.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(2.2rem, 5vw, 3.8rem);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+        }
+
+        .section p.lead {
+            max-width: 620px;
+            margin: 0 auto;
+            color: var(--muted);
+            font-size: 1.1rem;
+        }
+
+        /* GALLERY */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+            gap: 28px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .card {
+            overflow: hidden;
+            border-radius: 16px;
+            background: var(--bg);
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            transition: transform 0.4s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.4s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 30px 70px rgba(0, 0, 0, 0.15);
+        }
+
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.6s ease;
+            opacity: 0;
+        }
+
+        .card img.loaded {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .card:hover img {
+            transform: scale(1.06);
+        }
+
+        /* TEXT BLOCKS */
+        .text-block {
+            max-width: 720px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        /* CONTACT */
+        .contact-form {
+            max-width: 620px;
+            margin: 40px auto 0;
+        }
+
+        input,
+        textarea {
+            width: 100%;
+            padding: 16px 20px;
+            margin-bottom: 20px;
+            border: 1px solid var(--border);
+            background: var(--bg);
+            color: var(--text);
+            font-family: inherit;
+            border-radius: 8px;
+            transition: border 0.3s ease;
+        }
+
+        input:focus,
+        textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+        }
+
+        button {
+            background: var(--accent);
+            color: #111;
+            border: none;
+            padding: 16px 40px;
+            font-weight: 600;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        button:hover {
+            background: #c19a2e;
+            transform: translateY(-2px);
+        }
+
+        /* LIGHTBOX */
+        #lightbox {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 10, 10, 0.98);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 3000;
+            padding: 20px;
+        }
+
+        #lightbox img {
+            max-width: 92%;
+            max-height: 92vh;
+            border-radius: 12px;
+            box-shadow: 0 20px 80px rgba(0, 0, 0, 0.6);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 30px;
+            right: 30px;
+            color: white;
+            font-size: 2rem;
+            cursor: pointer;
+            opacity: 0.8;
+        }
+
+        /* MOBILE */
+        @media (max-width: 768px) {
+            nav {
+                padding: 18px 5%;
+            }
+
+            .nav-links {
+                display: none;
+                /* You can add a hamburger menu later if desired */
+            }
+
+            .section {
+                padding: 80px 5%;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            * {
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scroll-progress" id="progress"></div>
+
+    <nav>
+        <div class="logo">HOME</div>
+        <div class="nav-links">
+            <a href="#concept">Concept</a>
+            <a href="#exterior">Exterior</a>
+            <a href="#interior">Interior</a>
+            <a href="#night">Night</a>
+            <a href="#plans">Plans</a>
+            <a href="#contact">Contact</a>
+        </div>
+        <div class="nav-actions">
+            <button onclick="toggleTheme()"
+                style="background:none;border:none;color:inherit;cursor:pointer;font-size:1rem;">☼</button>
+        </div>
+    </nav>
+
+    <!-- HERO -->
+    <section class="hero" id="home">
+        <div class="layer-bg"></div>
+        <div class="layer-overlay"></div>
+        <div class="hero-content">
+            <h1>Brian Otieno</h1>
+            <p>Minimalist modern architecture that fuses sculptural curves with, fluid spaces and shifting light,
+                geometry, and silence.</p>
+            <a href="#concept" class="cta-btn">Explore the Design</a>
+        </div>
+    </section>
+
+    <!-- CONCEPT -->
+    <section class="section" id="concept">
+        <div class="text-block">
+            <h2>Concept</h2>
+            <p class="lead">A quiet dialogue between form and nature. Clean lines meet warm materials, creating spaces
+                that feel both timeless and alive.</p>
+        </div>
+    </section>
+
+    <!-- EXTERIOR -->
+    <section class="section" id="exterior">
+        <div class="section-header">
+            <h2>Exterior</h2>
+        </div>
+        <div class="gallery" id="exterior-gallery"></div>
+    </section>
+
+    <!-- INTERIOR -->
+    <section class="section" id="interior">
+        <div class="section-header">
+            <h2>Interior</h2>
+        </div>
+        <div class="gallery" id="interior-gallery"></div>
+    </section>
+
+    <!-- NIGHT -->
+    <section class="section" id="night">
+        <div class="section-header">
+            <h2>Night Views</h2>
+        </div>
+        <div class="gallery" id="night-gallery"></div>
+    </section>
+
+    <!-- PLANS -->
+    <section class="section" id="plans">
+        <div class="section-header">
+            <h2>Plans &amp; Sections</h2>
+        </div>
+        <div class="gallery" id="plans-gallery"></div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="section" id="contact" style="background: var(--bg);">
+        <div class="text-block">
+            <h2>Inquire About This Design</h2>
+            <p class="lead">Interested in a similar project or custom commission? Let's start a conversation.</p>
+
+            <!-- Direct Contact Details -->
+            <div class="contact-direct" style="margin: 1.5rem 0; font-size: 1.1rem; line-height: 1.6;">
+                <p>📞 Phone: <a href="tel:+254723328969" style="color: inherit; text-decoration: underline;">+254 723
+                        328 969</a></p>
+                <p>✉️ Email: <a href="mailto:otieno.brian@icloud.com"
+                        style="color: inherit; text-decoration: underline;">otieno.brian@icloud.com</a></p>
+            </div>
+        </div>
+
+        <form class="contact-form" onsubmit="handleSubmit(event)">
+            <input type="text" name="name" placeholder="Your Name" required>
+            <input type="email" name="email" placeholder="Email Address" required>
+            <textarea name="message" rows="5" placeholder="Tell us about your project..." required></textarea>
+            <button type="submit">Send Message</button>
+        </form>
+    </section>
+
+    <!-- LIGHTBOX -->
+    <div id="lightbox">
+        <span class="lightbox-close" onclick="closeLightbox()">×</span>
+        <img id="lightbox-img" alt="Enlarged architectural image">
+    </div>
+
+    <script>
+        // Theme toggle
+        function toggleTheme() {
+            document.body.classList.toggle('dark');
+            localStorage.setItem('theme', document.body.classList.contains('dark') ? 'dark' : 'light');
+        }
+
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark' ||
+            (!localStorage.getItem('theme') && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.body.classList.add('dark');
+        }
+
+        // Scroll progress
+        window.addEventListener('scroll', () => {
+            const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+            const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+            const scrolled = (winScroll / height) * 100;
+            document.getElementById('progress').style.width = scrolled + '%';
+        });
+
+        // Smooth scroll for nav links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                if (this.getAttribute('href') !== '#') {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+
+        // Intersection Observer for sections
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('show');
+                }
+            });
+        }, { threshold: 0.15 });
+
+        document.querySelectorAll('.section').forEach(section => observer.observe(section));
+
+        // Render images function (enhanced)
+        function renderImages(images, containerId) {
+            const container = document.getElementById(containerId);
+            if (!container) return;
+
+            images.forEach(src => {
+                const card = document.createElement('div');
+                card.className = 'card';
+
+                const img = document.createElement('img');
+                img.src = src;
+                img.loading = 'lazy';
+                img.alt = 'Architectural rendering';
+
+                img.onload = () => img.classList.add('loaded');
+
+                img.onerror = () => {
+                    img.src = 'https://via.placeholder.com/800x600/1a1a1a/ffffff?text=Image+Unavailable';
+                };
+
+                // Click to open lightbox
+                img.addEventListener('click', () => {
+                    openLightbox(src);
+                });
+
+                card.appendChild(img);
+                container.appendChild(card);
+            });
+        }
+
+        // Image data (update paths as needed)
+        renderImages([
+            "house-m-02.jpg", "house-m-03.jpg", "house-m-04.jpg", "house-m-05.jpg", "house-m-06.jpg"
+        ], "exterior-gallery");
+
+        renderImages([
+            "house-m-07.jpg", "house-m-08.jpg", "house-m-09.jpg", "house-m-10.jpg", "house-m-11.jpg",
+            "house-m-12.jpg", "house-m-13.jpg", "house-m-14.jpg", "house-m-15.jpg", "house-m-16.jpg",
+            "house-m-17.jpg", "house-m-18.jpg", "house-m-19.jpg", "house-m-20.jpg", "house-m-21.jpg",
+            "house-m-22.jpg", "house-m-23.jpg", "house-m-24.jpg", "house-m-25.jpg", "house-m-26.jpg",
+            "house-m-27.jpg", "house-m-28.jpg"
+        ], "interior-gallery");
+
+        renderImages([
+            "house-m-36.jpg", "house-m-37.jpg", "house-m-38.jpg", "house-m-39.jpg"
+        ], "night-gallery");
+
+        renderImages([
+            "house-m-plan-basement.jpg", "house-m-plan-ground.jpg", "house-m-plan-first.jpg",
+            "house-m-section-aa.jpg", "house-m-section-bb.jpg",
+            "house-m-elevation-north.jpg", "house-m-elevation-east.jpg",
+            "house-m-elevation-south.jpg", "house-m-elevation-west.jpg"
+        ], "plans-gallery");
+
+        // Lightbox
+        let currentLightboxSrc = '';
+
+        function openLightbox(src) {
+            currentLightboxSrc = src;
+            const lb = document.getElementById('lightbox');
+            const lbImg = document.getElementById('lightbox-img');
+            lbImg.src = src;
+            lb.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeLightbox() {
+            const lb = document.getElementById('lightbox');
+            lb.style.display = 'none';
+            document.body.style.overflow = 'visible';
+        }
+
+        // Close lightbox on escape or background click
+        document.getElementById('lightbox').addEventListener('click', function (e) {
+            if (e.target.id === 'lightbox') closeLightbox();
+        });
+
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'Escape') closeLightbox();
+        });
+
+        // Simple form handler (demo)
+        function handleSubmit(e) {
+            e.preventDefault();
+            alert("Thank you! Your inquiry has been received. (This is a demo – connect to a backend in production.)");
+            e.target.reset();
+        }
+
+        // Parallax on hero (subtle)
+        document.addEventListener('mousemove', (e) => {
+            const bg = document.querySelector('.layer-bg');
+            if (bg) {
+                const x = (window.innerWidth / 2 - e.pageX) / 90;
+                const y = (window.innerHeight / 2 - e.pageY) / 90;
+                bg.style.transform = `scale(1.08) translate(${x}px, ${y}px)`;
+            }
+        });
+    </script>
+</body>
+
+</html>
